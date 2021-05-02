@@ -14,3 +14,8 @@
     // priority: true,
   // });
 </script>
+
+	<!--script - Google Analytics-->
+	{{if site.GoogleAnalytics}}{{template "_internal/google_analytics_async.html" .}}{{end}}
+	<!--script - Google AdSense-->
+	{{partial "adsense.html" .}}
