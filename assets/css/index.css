@@ -64,6 +64,10 @@ a:hover {
   line-height: 200%;
 }
 
+.highlight code {
+  font-family: 'Hack';
+}
+
 /* header */
 
 .site-date-catalog {
