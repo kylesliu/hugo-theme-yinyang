@@ -24,7 +24,14 @@
       "datePublished": "{{ .Date }}",
       "dateModified" : "{{ .Date }}",
       "url" : "{{ .Permalink }}",
-      "keywords" : [ {{ if isset .Params "tags" }}{{ range .Params.tags }}"{{ . }}",{{ end }}{{ end }} ]
+      "keywords" : [ 
+        {{- if .Keywords -}}
+        {{ $length := len .Keywords | add -1 -}}
+          {{ range $index, $element := .Keywords }}"{{ $element | safeHTML }}"{{if ne $index $length }}, {{ end }}{{ end }}
+        {{- else if .Site.Params.keywords -}}
+          {{ $length := len .Site.Params.keywords | add -1 -}}
+          {{ range $index, $element := .Site.Params.keywords }}{{ $element | safeHTML }}{{if ne $index $length }}, {{ end }}{{ end }}
+        {{- end }}]
   }
 </script>
 

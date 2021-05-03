@@ -39,6 +39,15 @@
   <meta property="og:image" content="{{ .Params.album }}" />
   {{ end }}
 
+  {{- if .Keywords -}}
+  {{ $length := len .Keywords | add -1 -}}
+  <meta name="keywords" content="{{ range $index, $element := .Keywords }}{{ $element | safeHTML }}{{if ne $index $length }}, {{ end }}{{ end }}" />
+  {{- else if .Site.Params.keywords -}}
+    {{ $length := len .Site.Params.keywords | add -1 -}}
+    <meta name="keywords" content="{{ range $index, $element := .Site.Params.keywords }}{{ $element | safeHTML }}{{if ne $index $length }}, {{ end }}{{ end }}" />
+  {{- end }}
+
+
   {{ with resources.Get "css/index.css" | minify }}
     <style>{{ .Content | safeCSS }}</style>
   {{ end }}
